@@ -41,7 +41,7 @@ export default function Painel(){
            get(perfilRef).then(snapshot =>{
             if(snapshot.exists()){
               const perfil = snapshot.val()
-              setNome(perfil.nome );
+              setNome(perfil.nome + " " + perfil.sobrenome );
             }
            })
         }
