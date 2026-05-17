@@ -9,6 +9,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'fire
 import { ref, set } from 'firebase/database';
 import { auth, db } from '@/app/firebase/config';
 import Logo from '@/app/assets/loguinho.png.png'
+import { signIn, signOut, useSession } from "next-auth/react";
 
 type FieldType = {
   nome: string;
@@ -52,22 +53,30 @@ export default function Home() {
       setLoading(false);
     }
   };
+    const handleGoogleLogin = async () => {
+    await signIn("google", { callbackUrl: "/painel" });
+  };
   
   return (
     <div className='w-screen h-screen flex items-center justify-center bg-image'>
       <div className='flex flex-col md:flex-row w-[90%] md:w-2/3 lg:w-1/2 items-center justify-center gap-12 md:gap-0 pb-10 md:pb-20 bg-white/10 md:bg-transparent p-8 md:p-0 rounded-3xl backdrop-blur-sm md:backdrop-blur-none shadow-lg md:shadow-none'>
         <div className='w-full flex flex-col justify-center items-center'>
            <img src={Logo.src} alt="" className='w-64' />
-           
         </div>
-      
-        <div className='w-full flex flex-col justify-center items-center gap-4'>
+      <div className='w-full flex flex-col justify-center items-center gap-4'>
           <button 
             onClick={() => setIsModalSignInOpen(true)}
             className='w-56 p-3 bg-blue-400 rounded text-white hover:bg-blue-400 hover:bg-blue-500 hover:text-white rounded-lg cursor-pointer'>
             Entre
           </button>
-          <p className='text-black md:text-slate-500'>Não tem uma conta? <button onClick={() => setIsModalSignUpOpen(true)} className='text-black md:text-blue-400 hover:text-blue-300 hover:underline cursor-pointer'>Cadastre-se</button></p>
+
+          <button
+            onClick={handleGoogleLogin}
+            className='w-56 p-3 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 cursor-pointer flex items-center justify-center gap-2'>
+            <img src="/google.png" alt="Google" width={18} />
+            Entrar com Google
+          </button>
+          <p className='text-black md:text-slate-500'>Não tem uma conta? <button onClick={() => setIsModalSignUpOpen(true)} className='text-black md:text-blue-600 hover:text-blue-300 hover:underline cursor-pointer'>Cadastre-se</button></p>
         </div>
 
         {/* Sign In Modal */}
