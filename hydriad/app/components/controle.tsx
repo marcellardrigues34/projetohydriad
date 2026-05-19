@@ -3,7 +3,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 
-const ESP32_IP = "http://192.168.4.1";
+const ESP32_IP = "http://10.38.185.258";
 
 const keyMap: Record<string, string> = {
   ArrowUp: "F",
@@ -99,7 +99,7 @@ export default function BoatController() {
     </div>
     
     <div className="relative w-full aspect-video bg-neutral-900 flex items-center justify-center">
-      <img src="http://172.18.185.71:81/stream" alt="Stream da ESP32-CAM"  className="w-full h-full object-contain block" />
+      <img src="http://10.38.185.71/stream" alt="Stream da ESP32-CAM"  className="w-full h-full object-contain block" />
      </div>
     </div>
       

@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { ref, onValue, runTransaction } from "firebase/database";
 import { getAuth } from "firebase/auth";
 import { db } from "@/app/firebase/config";
+import { FaToggleOn } from "react-icons/fa";
+import { FaToggleOff } from "react-icons/fa";
 
 const ORDEM_DIAS = ["seg", "ter", "qua", "qui", "sex", "sab", "dom"];
 // adicionar//
@@ -108,7 +110,11 @@ export default function Dashboard() {
     pdf.addImage(dataUrl, "PNG", 0, 0, 210, 297);
     pdf.save("relatorio.pdf");
   };
+   const [bateria, setBateria] = useState<boolean>(false);
 
+   function toggleBateria(){
+       setBateria(!bateria);
+   }
   return (
     <div className="flex flex-col gap-4">
       {/* DASHBOARD */}
@@ -141,6 +147,15 @@ export default function Dashboard() {
               <div className="bg-emerald-500 h-2 rounded-full" style={{ width: '82%' }}></div>
             </div>
           </div>
+        </div>
+        <div className="flex flex-wrap g-10">
+            <div className={`${bateria ? "bg-green-500" : "bg-red-500"} p-6 rounded-xl w-[250px] flex flex-col gap-4 shadow-xl`}>
+              <p className="text-2xl text-white font-semibold">Bateria</p>
+              <button className="text-6xl text-white" onClick={toggleBateria}>
+                {bateria ? <FaToggleOn /> : <FaToggleOff /> }
+              </button>
+              <p>{bateria ? 'Ligada': 'Desligada'}</p>
+            </div>
         </div>
       </div>
 
