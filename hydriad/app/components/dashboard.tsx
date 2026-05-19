@@ -56,7 +56,7 @@ export default function Dashboard() {
   }, []);
 
   // coletas HOJE//
-  const hoje = new Date().toISOString().split("")[0];
+  const hoje = new Date().toISOString().split("T")[0];
   const coletasHoje = dados?.[hoje] ?? 0;
 
   // 📊 Labels e valores
@@ -111,15 +111,6 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-4">
-
-      {/* BOTÃO */}
-      <button
-        onClick={exportarPDF}
-        className="bg-blue-400 p-4 rounded-lg w-fit text-white"
-      >
-        Exportar PDF
-      </button>
-
       {/* DASHBOARD */}
   
     <div className="flex flex-col gap-6">
@@ -155,9 +146,9 @@ export default function Dashboard() {
 
       {/* Main Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
+        <div className="lg:col-span-3 bg-white rounded-xl shadow-sm border border-slate-100 p-6">
           <h3 className="text-slate-500 text-sm mb-6">Histórico de Coleta Diária </h3>
-          <div className="h-72 w-full">
+          <div className="h-96 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={dadosFormatados}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
